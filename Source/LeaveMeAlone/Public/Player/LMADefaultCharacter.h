@@ -6,8 +6,11 @@
 #include "GameFramework/Character.h"
 #include "LMADefaultCharacter.generated.h"
 
+
 class UCameraComponent;
 class USpringArmComponent;
+class ULMAHealthComponent;
+class UAnimMontage;
 
 UCLASS()
 class LEAVEMEALONE_API ALMADefaultCharacter : public ACharacter
@@ -18,12 +21,18 @@ public:
 	// Sets default values for this character's properties
 	ALMADefaultCharacter();
 
+	UFUNCTION()
+	ULMAHealthComponent* GetHealthComponent() const { return HealthComponent; }
+
 protected:
-	
+
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USpringArmComponent* SpringArmComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UCameraComponent* CameraComponent;
+
+
 
 	UPROPERTY()
 	UDecalComponent* CurrentCursor = nullptr;
@@ -40,7 +49,14 @@ protected:
 	float MaxDistance = 1600.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	float ZoomSpeed = 30.0f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components|Health")
+	ULMAHealthComponent* HealthComponent;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components|Health")
+	ULMAHealthComponent* HealthComponent;
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* DeathMontage;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -60,4 +76,7 @@ private:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void ZoomCamera(float Value);
+	void OnDeath();
+	void OnHealthChanged(float NewHealth);
+	void RotationPlayerOnCursor();
 };
