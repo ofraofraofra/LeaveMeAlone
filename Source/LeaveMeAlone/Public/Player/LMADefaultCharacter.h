@@ -58,6 +58,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
 	UAnimMontage* DeathMontage;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "StaminaComponent")
+	float MaxStamina = 100.0f;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Sprint")
+	bool SprintCheck = false;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -72,6 +77,7 @@ private:
 	float YRotation = -75.0;
 	float ArmLength = 1400.0f;
 	float FOV = 55.0f;
+	float Stamina = 100.0f;	
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
@@ -79,4 +85,6 @@ private:
 	void OnDeath();
 	void OnHealthChanged(float NewHealth);
 	void RotationPlayerOnCursor();
+	void SprintStart();
+	void SprintStop();
 };
