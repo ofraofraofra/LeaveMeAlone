@@ -11,6 +11,7 @@
 #include "Component/LMAHealthComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Engine/Engine.h"
+#include "Component/LMAWeaponComponent.h"
 
 
 // Sets default values
@@ -39,6 +40,7 @@ ALMADefaultCharacter::ALMADefaultCharacter()
 	bUseControllerRotationRoll = false;
 
 	HealthComponent = CreateDefaultSubobject<ULMAHealthComponent>("HealthComponent");
+	WeaponComponent = CreateDefaultSubobject<ULMAWeaponComponent>("Weapon");
 
 
 }
@@ -101,6 +103,9 @@ void ALMADefaultCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 	PlayerInputComponent->BindAxis("MouseWheel", this, &ALMADefaultCharacter::ZoomCamera);
 	PlayerInputComponent->BindAction("SprintStart", IE_Pressed, this, &ALMADefaultCharacter::SprintStart);
 	PlayerInputComponent->BindAction("SprintStop", IE_Released, this, &ALMADefaultCharacter::SprintStop);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, WeaponComponent, &ULMAWeaponComponent::Fire);
+	PlayerInputComponent->BindAction("Fire", IE_Released, WeaponComponent, &ULMAWeaponComponent::StopFire);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, WeaponComponent, &ULMAWeaponComponent::Reload);
 
 }
 
