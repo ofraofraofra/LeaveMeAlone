@@ -1,4 +1,4 @@
-// LeaveMeAlone Game by Netologiya. All RightsReserved.
+// LeaveMeAlone Game by Netologiya. All Rights Reserved.
 
 #pragma once
 
