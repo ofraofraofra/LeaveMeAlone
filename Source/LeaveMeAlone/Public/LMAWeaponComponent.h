@@ -48,3 +48,5 @@ private:
 	bool CanReload() const;
 	void ReloadClip();
 };
+
+
