@@ -26,6 +26,7 @@ public:
 	bool AddHealth(float NewHealth);
 	bool IsHealthFull() const;
 
+	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnDeath On_Death;
 	FOnHealthChanged OnHealthChanged;
 
